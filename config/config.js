@@ -9,11 +9,11 @@ if (process.env.NODE_ENV === 'test'){
     });
 }
 module.exports = {
-    host: '127.0.0.1',
-    username: 'root',
-    password: '',
-    database: 'microuniverso',
-    dialect: 'mysql',
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    dialect: process.env.DIALECT,
     logging: false,
     define:{
         timestamps: false,

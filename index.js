@@ -14,7 +14,7 @@ app.use(cors())
 routes(app)
 
 //Testando variáveis de ambiente
-app.listen(3000, () => {
+app.listen(process.env.APP_PORT || 3000, () => {
     console.log(process.env.NODE_ENV)
 })
 
