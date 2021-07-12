@@ -32,34 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     email:  {
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        notNull:{
+      validate: {
+        notNull: {
           msg: "Campo email é obrigatório !"
         },
-        isEmail:{
+        isEmail: {
           msg: "Insira um e-mail válido !"
-        },
-        isUnique: function(value, next) {
-
-          users.find({
-            where: {email: value},
-            attributes: ['id']
-          })
-              .done(function(error, user) {
-
-                if (error)
-                    // Se o find encontrar algum erro
-                  return next(error);
-
-                if (user)
-                  //Se encontrar um usuário com o e-mail especificado
-                  return next('E-mail já em uso');
-
-                // Se passar pelas validações anteriores, passa direto
-                next();
-
-              });
-
         }
       }
     },
