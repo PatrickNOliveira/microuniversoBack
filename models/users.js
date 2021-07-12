@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         isEmail:{
           msg: "Insira um e-mail válido !"
+        },
+        unique: {
+          args: true,
+          msg: 'Email em uso!'
         }
       }
     },
