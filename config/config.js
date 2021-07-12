@@ -14,6 +14,7 @@ module.exports = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialect: process.env.DIALECT,
+    storage: './__tests/database.sqlite',
     logging: false,
     define:{
         timestamps: false,
