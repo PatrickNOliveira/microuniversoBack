@@ -12,7 +12,7 @@ describe('Authentication', () => {
             firstName: 'Patrick',
             lastName: 'Nascimento',
             email: 'patrickndeoliveira@gmail.com',
-            password: '123'
+            password: '123456'
         }
         const user = await users.create(userData)
         //Faz uma requisição para a rota de autenticação
