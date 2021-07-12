@@ -39,9 +39,27 @@ module.exports = (sequelize, DataTypes) => {
         isEmail:{
           msg: "Insira um e-mail válido !"
         },
-        unique: {
-          args: true,
-          msg: 'Email em uso!'
+        isUnique: function(value, next) {
+
+          users.find({
+            where: {email: value},
+            attributes: ['id']
+          })
+              .done(function(error, user) {
+
+                if (error)
+                    // Se o find encontrar algum erro
+                  return next(error);
+
+                if (user)
+                  //Se encontrar um usuário com o e-mail especificado
+                  return next('E-mail já em uso');
+
+                // Se passar pelas validações anteriores, passa direto
+                next();
+
+              });
+
         }
       }
     },
