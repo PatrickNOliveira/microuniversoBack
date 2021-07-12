@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "SET NODE_ENV=test&&npx sequelize db:migrate",
-    "test": "SET NODE_ENV=test&&jest",
+    "test": "SET NODE_ENV=test&&jest --detectOpenHandles",
     "posttest": "SET NODE_ENV=test&&npx sequelize db:migrate:undo:all",
     "start": "SET NODE_ENV=production&&node index.js",
     "dev": "SET NODE_ENV=test&&nodemon index.js"
