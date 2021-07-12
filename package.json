@@ -24,6 +24,7 @@
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.10"
+    "nodemon": "^2.0.10",
+    "sqlite3": "^5.0.2"
   }
 }
