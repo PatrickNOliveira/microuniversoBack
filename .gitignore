@@ -53,3 +53,4 @@ src/tmp/
 
 .env
 .env.test
+./__tests__/database.sqlite
