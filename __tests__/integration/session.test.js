@@ -3,9 +3,14 @@ const bcrypt = require('bcrypt')
 
 const app = require('../../index')
 
+const truncate = require('../../utils/truncate')
+
 const {users} = require('../../models')
 
 describe('Authentication', () => {
+    beforeEach(async () => {
+        await truncate()
+    })
     afterEach(() => {
         app.close()
     })
@@ -16,7 +21,7 @@ describe('Authentication', () => {
             firstName: 'Patrick',
             lastName: 'Nascimento',
             email: 'patrickndeoliveira@gmail.com',
-            password: '123456'
+            password: await bcrypt.hash('123456', 12)
         })
         console.log(user)
         //Faz uma requisição para a rota de autenticação
@@ -24,7 +29,7 @@ describe('Authentication', () => {
             .post('/sessions')
             .send({
                 email: user.email,
-                password: await bcrypt.hash('123456', 12)
+                password: '123456'
             })
         //Espera que o status retornado seja 200 (OK)
         expect(response.status).toBe(200)
