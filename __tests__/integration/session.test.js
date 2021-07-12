@@ -15,8 +15,9 @@ describe('Authentication', () => {
             firstName: 'Patrick',
             lastName: 'Nascimento',
             email: 'patrickndeoliveira@gmail.com',
-            password: '123'
+            password: '123456'
         })
+        console.log(user)
         //Faz uma requisição para a rota de autenticação
         const response = await request(app)
             .post('/sessions')
