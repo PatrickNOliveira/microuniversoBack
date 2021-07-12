@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "SET NODE_ENV=test&&npx sequelize db:migrate",
     "test": "SET NODE_ENV=test&&jest",
+    "posttest": "SET NODE_ENV=test&&npx sequelize db:migrate:undo:all",
     "start": "SET NODE_ENV=production&&node index.js",
-    "dev": "SET NODE_ENV=development&&nodemon index.js"
+    "dev": "SET NODE_ENV=test&&nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +27,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.10",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "supertest": "^6.1.3"
   }
 }
