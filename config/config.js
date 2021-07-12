@@ -15,7 +15,7 @@ module.exports = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialect: process.env.NODE_ENV.trim()==='test'?'sqlite':process.env.DIALECT,
-    storage: './__tests/database.sqlite',
+    storage: './__tests__/database.sqlite',
     logging: false,
     define:{
         timestamps: false
