@@ -32,4 +32,31 @@ describe('Users', () => {
         //Espera-se que o status retornado seja 201 (Created)
         expect(response.status).toBe(201)
     });
+
+
+    //Teste para garantir que o usuário só acessará a rota de editar usuário se estiver autenticado
+    it('should be able to access edit users route when authenticated', async () => {
+
+        //Seta um usuário com dados aleatórios usando o factory mas, envia uma senha padrão
+        // pois ela será necessária no teste
+        const user = await factory.create('User', {
+            password: await bcrypt.hash('123456', 12)
+        })
+
+        //Faz uma requisição para a rota de edição de usuário enviando dados aleatórios e um token auth
+        const response = await request(app)
+            .post('/sessions')
+            .send({
+                email: user.email,
+                password: '123456'
+            })
+
+        //Faz a requisição para a rota put de edição de usuário
+        const secondResponse = await request(app)
+            .put('/user')
+            .set('Authorization', `Bearer ${response.body.token}`)
+
+        //Espera-se que o status retornado seja 200 (Ok)
+        expect(secondResponse.status).toBe(200)
+    });
 })
