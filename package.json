@@ -9,7 +9,7 @@
       "collectCoverage": true,
       "coverageReporters": ["json", "html"]
     },
-    "test": "SET NODE_ENV=test&&jest --detectOpenHandles --coverage",
+    "test": "SET NODE_ENV=test&&jest --detectOpenHandles",
     "posttest": "SET NODE_ENV=test&&npx sequelize db:migrate:undo:all",
     "start": "SET NODE_ENV=production&&node index.js",
     "dev": "SET NODE_ENV=development&&nodemon index.js"

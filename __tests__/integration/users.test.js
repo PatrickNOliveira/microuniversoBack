@@ -38,7 +38,7 @@ describe('Users', () => {
             password: await bcrypt.hash('123456', 12)
         })
 
-        //Faz uma requisição para a rota de edição de usuário enviando dados aleatórios e um token auth
+        //Faz uma requisição para a rota de autenticação do usuário
         const response = await request(app)
             .post('/sessions')
             .send({
@@ -48,7 +48,8 @@ describe('Users', () => {
 
         const newData = await genericUser
 
-        //Faz a requisição para a rota put de edição de usuário
+        //Faz a requisição para a rota put de edição de usuário enviando o bearer token adquirido na
+        // requisição anterior
         const secondResponse = await request(app)
             .put('/user')
             .send(newData)
@@ -56,5 +57,20 @@ describe('Users', () => {
 
         //Espera-se que o status retornado seja 200 (Ok)
         expect(secondResponse.status).toBe(200)
+    });
+
+    //Teste para garantir que o usuário não acessará a rota de editar usuários se não estiver logado
+    it('should be not able to access edit users route when dont authenticated', async () => {
+
+        //Seta dados genéricos de usuário para serem usados na requisição
+        const newData = await genericUser
+
+        //Faz a requisição para a rota put de edição de usuário sem enviar o token
+        const secondResponse = await request(app)
+            .put('/user')
+            .send(newData)
+
+        //Espera-se que o status retornado seja 401 (unauthorized)
+        expect(secondResponse.status).toBe(401)
     });
 })
