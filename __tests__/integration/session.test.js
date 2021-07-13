@@ -1,10 +1,7 @@
 const request = require('supertest')
 const bcrypt = require('bcrypt')
-
 const app = require('../../index')
-
 const truncate = require('../../utils/truncate')
-
 const factory = require('../factories')
 
 describe('Authentication', () => {
