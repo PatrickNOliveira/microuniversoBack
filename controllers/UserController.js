@@ -31,7 +31,7 @@ class UserController {
         try {
             const data = req.body
             const user = await userService.editUser(data, req.user.id);
-            return res.status(201).json(user)
+            return res.status(200).json(user)
         } catch (err) {
             return res.status(500).json(err.message)
         }

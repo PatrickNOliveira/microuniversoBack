@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt')
-
 const {users} = require('../../models')
 const truncate = require('../../utils/truncate')
 const factory = require('../factories')
-const faker = require('faker')
+const genericUser = require('../../utils/genericUserGenerate')
 
 describe('User', ()=>{
     //Limpa a base de dados antes de cada teste
@@ -31,12 +30,7 @@ describe('User', ()=>{
 
 
         //Cria novos dados aleatoriamente para o usuário
-        const newData = {
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            email: faker.internet.email(),
-            password: faker.internet.password()
-        }
+        const newData = await genericUser
 
         //Atualiza o usuário recém criado
         const updatedUser = await users.update(newData, {
