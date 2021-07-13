@@ -1,12 +1,12 @@
 const { factory } = require('factory-girl')
-const bcrypt = require('bcrypt')
+const faker = require('faker')
 const { users } = require('../models')
 
 factory.define('User', users, {
-    firstName: 'Patrick',
-    lastName: 'Nascimento',
-    email: 'patrickndeoliveira@gmail.com',
-    password: '123456'
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: faker.internet.password()
 })
 
 module.exports = factory
