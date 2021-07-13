@@ -11,6 +11,24 @@ class UserServices extends Services {
         user.password = await bcrypt.hash(user.password, 12)
         return database[this.model].create(user)
     }
+
+    async editUser(user, id){
+        user.password = await bcrypt.hash(user.password, 12)
+        //Atualiza o usuário recém criado
+        const updatedUser = await database[this.model].update(user, {
+            where: { id: Number(id) },
+            plain: true
+        }).then(async () => {
+            //Ao terminar de atualizar o usuário, busca-o na base de dados sem o id para que o teste seja
+            // possível de ser realizado e o seta na variável updatedUser
+            return await database[this.model].findOne({
+                raw: true,
+                attributes:{exclude:['password']},
+                where: { id: Number(id) }
+            })
+        })
+        return updatedUser
+    }
 }
 
 module.exports = UserServices

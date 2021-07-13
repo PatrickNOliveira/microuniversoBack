@@ -26,6 +26,16 @@ class UserController {
             return res.status(500).json(err.message)
         }
     }
+
+    static async editarUsuario (req, res) {
+        try {
+            const data = req.body
+            const user = await userService.editUser(data, req.user.id);
+            return res.status(201).json(user)
+        } catch (err) {
+            return res.status(500).json(err.message)
+        }
+    }
 }
 
 module.exports = UserController
