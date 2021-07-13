@@ -54,11 +54,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     sequelize,
-    modelName: 'users',
-    defaultScope: {
-      //Elimina a senha das consultas para garantir a integridade e a segurança do sistema
-      attributes: { exclude: ['password'] },
-    }
+    modelName: 'users'
   });
   return users;
 };
