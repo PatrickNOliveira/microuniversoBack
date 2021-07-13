@@ -5,7 +5,7 @@ const app = require('../../index')
 
 const truncate = require('../../utils/truncate')
 
-const {users} = require('../../models')
+const factory = require('../factories')
 
 describe('Authentication', () => {
     beforeEach(async () => {
@@ -16,12 +16,9 @@ describe('Authentication', () => {
     })
     //Teste para a rota de autenticação
     it('should auth with valid credentials', async () => {
-        //Cria um usuário no banco de dados sqlite
-        const user = await users.create({
-            firstName: 'Patrick',
-            lastName: 'Nascimento',
-            email: 'patrickndeoliveira@gmail.com',
-            password: await bcrypt.hash('123456', 12)
+        //Cria um usuário no banco de dados sqlite usando o factory
+        const user = await factory.create('User', {
+            password: bcrypt.hash('123456', 12)
         })
         //Faz uma requisição para a rota de autenticação
         const response = await request(app)
@@ -36,12 +33,8 @@ describe('Authentication', () => {
 
     //Teste para garantir que a rota de autenticação está recusando usuários incorretos
     it('should auth with valid credentials', async () => {
-        //Cria um usuário no banco de dados sqlite
-        const user = await users.create({
-            firstName: 'Patrick',
-            lastName: 'Nascimento',
-            email: 'patrickndeoliveira@gmail.com',
-            password: await bcrypt.hash('123456', 12)
+        const user = await factory.create('User', {
+            password: bcrypt.hash('123456', 12)
         })
         //Faz uma requisição para a rota de autenticação com credenciais inválidas
         const response = await request(app)
@@ -56,12 +49,8 @@ describe('Authentication', () => {
 
     //Teste para garantir que a rota de autenticação está retornando um jwt token
     it('should return jwt token when authenticated', async () => {
-        //Cria um usuário no banco de dados sqlite
-        const user = await users.create({
-            firstName: 'Patrick',
-            lastName: 'Nascimento',
-            email: 'patrickndeoliveira@gmail.com',
-            password: await bcrypt.hash('123456', 12)
+        const user = await factory.create('User', {
+            password: bcrypt.hash('123456', 12)
         })
         //Faz uma requisição para a rota de autenticação
         const response = await request(app)
