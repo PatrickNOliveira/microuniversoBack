@@ -12,7 +12,7 @@ factory.define('User', users, {
 factory.define('Url', users, {
     destiny: faker.internet.url(),
     tinyUrl: faker.lorem.word(5,5),
-    user_id: Math.floor(faker.random.number()),
+    user_id: Math.floor(faker.datatype.number()),
 })
 
 module.exports = factory
