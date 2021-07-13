@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "pretest": "SET NODE_ENV=test&&npx sequelize db:migrate",
-    "test": "SET NODE_ENV=test&&jest --detectOpenHandles",
+    "jest": {
+      "collectCoverage": true,
+      "coverageReporters": ["json", "html"]
+    },
+    "test": "SET NODE_ENV=test&&jest --detectOpenHandles --coverage",
     "posttest": "SET NODE_ENV=test&&npx sequelize db:migrate:undo:all",
     "start": "SET NODE_ENV=production&&node index.js",
     "dev": "SET NODE_ENV=development&&nodemon index.js"
@@ -28,6 +32,7 @@
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
+    "jest-cli": "^27.0.6",
     "nodemon": "^2.0.10",
     "sqlite3": "^5.0.2",
     "supertest": "^6.1.3"
