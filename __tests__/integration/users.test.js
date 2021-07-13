@@ -26,7 +26,7 @@ describe('Users', () => {
                 firstName: faker.name.firstName(),
                 lastName: faker.name.lastName(),
                 email: faker.internet.email(),
-                password: bcrypt.hash(faker.internet.password(), 12)
+                password: await bcrypt.hash(faker.internet.password(), 12)
             })
 
         //Espera-se que o status retornado seja 201 (Created)
