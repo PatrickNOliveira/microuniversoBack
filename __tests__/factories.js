@@ -9,4 +9,10 @@ factory.define('User', users, {
     password: faker.internet.password()
 })
 
+factory.define('Url', users, {
+    destiny: faker.internet.url(),
+    tinyUrl: faker.lorem.word(5,5),
+    user_id: Math.floor(faker.random.number()),
+})
+
 module.exports = factory
