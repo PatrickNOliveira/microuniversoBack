@@ -111,7 +111,7 @@ describe('Users', () => {
             .post('/register')
             .send(data)
 
-        //Espera-se que o status retornado seja 500 pois o e-mail já está sendo usado
-        expect(secondResponse.status).toBe(500)
+        //Verifica se a string possui o valor Validation error e espera que essa verificação retorne true
+        expect(secondResponse.body.indexOf("Validation error") > -1).toBe(true)
     });
 })

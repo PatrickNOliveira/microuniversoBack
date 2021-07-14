@@ -41,7 +41,6 @@ describe('Url', ()=>{
             .post('/url')
             .send(data)
 
-       console.log(secondResponse.body)
         //Verifica se a string possui o valor Validation error e espera que essa verificação retorne true
         expect(secondResponse.body.indexOf("Validation error") > -1).toBe(true)
     });
