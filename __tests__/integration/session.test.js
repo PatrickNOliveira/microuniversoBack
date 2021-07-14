@@ -56,7 +56,7 @@ describe('Authentication', () => {
                 email: user.email,
                 password: '123456'
             })
-        //Espera que o status retornado seja 200 (OK)
+        //Espera que a resposta da requisição tenha um token
         expect(response.body).toHaveProperty('token')
     });
 })
