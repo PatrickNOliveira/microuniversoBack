@@ -14,6 +14,7 @@ module.exports = {
       },
       tinyUrl: {
         allowNull: false,
+        unique: true,
         type: Sequelize.STRING
       },
       user_id: {

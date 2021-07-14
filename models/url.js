@@ -29,6 +29,16 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull:{
           msg: "Campo tinyUrl é obrigatório !"
+        },
+        isUnique: async (value, next) => {
+
+          const user = await Url.findOne({
+            where: {tinyUrl: value}
+          })
+
+
+          if (user){ return next('Url encurtada já existe !')}
+          next()
         }
       }
     },
