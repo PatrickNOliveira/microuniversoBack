@@ -7,17 +7,20 @@
     "pretest": "SET NODE_ENV=test&&npx sequelize db:migrate",
     "jest": {
       "collectCoverage": true,
-      "coverageReporters": ["json", "html"]
+      "coverageReporters": [
+        "json",
+        "html"
+      ]
     },
     "test": "SET NODE_ENV=test&&jest --detectOpenHandles --coverage",
     "posttest": "SET NODE_ENV=test&&npx sequelize db:migrate:undo:all",
-    "start": "SET NODE_ENV=production&&node index.js",
+    "start": "NODE_ENV=production&&nodemon index.js",
     "dev": "SET NODE_ENV=development&&nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
