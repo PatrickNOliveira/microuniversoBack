@@ -3,7 +3,6 @@ const factory = require('../factories')
 const genericUrl = require('../../utils/genericUrlGenerate')
 const app = require('../../index')
 const request = require('supertest')
-const {Url} = require('../../models')
 
 describe('Url', ()=>{
     //Limpa a base de dados antes de cada teste
