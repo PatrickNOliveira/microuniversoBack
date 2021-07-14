@@ -1,11 +1,35 @@
 version: '3'
 
 services:
+
+  db:
+    container_name: 'database-micro'
+    image: mysql:5.7.31
+    restart: always
+    networks:
+      - application
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_ROOT_PASSWORD: microuniverso
+      MYSQL_PASSWORD: "${DB_PASS}"
+    ports:
+      - '3306:3306'
+
   app:
     build: .
     command: npm start
+    restart: always
+    networks:
+      - application
     ports:
       - 3000:3000
     volumes:
       - .:/usr/src/app
+    depends_on:
+      - db
 
+networks:
+  application:
