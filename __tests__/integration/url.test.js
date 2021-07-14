@@ -42,6 +42,34 @@ describe('Url', ()=>{
         expect(response.body).not.toBeUndefined()
     });
 
+    //Teste para garantir que a rota de inserir um novo url vai inserir o user_id se o
+    // usuário estiver autenticado
+    it('should be insert a user_id in url when user is authenticated', async () => {
+
+        //Cria um usuário no banco de dados sqlite
+        const user = factory.create('User')
+
+        //Autentica o usuário recém criado na API
+        const auth = await request(app)
+            .post('/sessions').
+            send({
+                email: user.email,
+                password: user.password
+            })
+
+        //Gera dados genéricos para a URL
+        const data = await genericUrl
+        //Faz uma requisição para a rota de inserção de url na API com os dados da URL genérica e com
+        // o token de autenticação do usuário recém criado
+        const response = await request(app)
+            .post('/url')
+            .send(data)
+            .set('Authorization', `Bearer ${auth.body.token}`)
+
+        //Espera-se que o user id seja igual ao id do usuário recém criado
+        expect(response.body.user_id).toBe(user.id)
+    });
+
     //Teste para garantir que o usuário não conseguirá inserir uma URL com o mesmo valor no tinyUrl
    it('should be not able to insert a used tinyUrl', async () => {
         //Gera dados genéricos para a URL
