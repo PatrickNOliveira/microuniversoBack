@@ -18,10 +18,15 @@ describe('User', ()=>{
             email: 'patrickndeoliveira@gmail.com',
             password: await bcrypt.hash('123', 12)
         }
+        //Insere o usuário no campo de dados
         const user = await users.create(userData)
+        //Espera que a comparação do bcrypt entre as senhas do usuário e o valor digitado manualmente (123)
+        // retorne true, ou seja, que elas sejam equivalentes
         expect(await bcrypt.compare('123', user.password)).toBe(true)
     });
 
+
+    //Teste para a função de editar usuários
     it('Should edit a user', async ()=> {
         //Cria um usuário no banco de dados usando um factory
         const user = await factory.create('User', {
