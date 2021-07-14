@@ -28,4 +28,22 @@ describe('Url', ()=>{
         expect(response.status).toBe(201)
     });
 
+    //Teste para garantir que o usuário não conseguirá inserir uma URL com o mesmo valor no tinyUrl
+   it('should be not able to insert a used tinyUrl', async () => {
+        //Gera dados genéricos para a URL
+        const data = await genericUrl
+        //Faz uma requisição para a rota de inserção de url na API e envia os dados da URL genérica gerada
+        const response = await request(app)
+            .post('/url')
+            .send(data)
+
+        const secondResponse = await request(app)
+            .post('/url')
+            .send(data)
+
+       console.log(secondResponse.body)
+        //Verifica se a string possui o valor Validation error e espera que essa verificação retorne true
+        expect(secondResponse.body.indexOf("Validation error") > -1).toBe(true)
+    });
+
 })
