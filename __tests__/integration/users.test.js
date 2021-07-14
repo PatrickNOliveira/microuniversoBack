@@ -66,11 +66,52 @@ describe('Users', () => {
         const newData = await genericUser
 
         //Faz a requisição para a rota put de edição de usuário sem enviar o token
-        const secondResponse = await request(app)
+        const response = await request(app)
             .put('/user')
             .send(newData)
 
         //Espera-se que o status retornado seja 401 (unauthorized)
-        expect(secondResponse.status).toBe(401)
+        expect(response.status).toBe(401)
+    });
+
+    //Teste para garantir que o usuário não conseguirá inserir dados no model de usuários se não passar
+    // pelas validações de not Null
+    it('should be not enter a user when submitting missing data', async () => {
+
+        //Cria dados para serem enviados para a requisição sem mandar um campo email(obrigatório)
+        const data = {
+            firstName: "Integration",
+            secondName: "Test",
+            password: "123456"
+        }
+
+        //Faz a requisição para a rota de registro
+        const response = await request(app)
+            .post('/register')
+            .send(data)
+
+        //Espera-se que o status retornado seja 500
+        expect(response.status).toBe(500)
+    });
+
+    //Teste para garantir que o usuário não conseguirá cadastrar o mesmo e-mail duas vezes
+
+    it('should not be able to insert a used email', async () => {
+
+        //Cria dados  genéricos de usuário para serem enviados a requisição
+        const data = await genericUser
+
+        //Faz a requisição para a rota de registro com os dados gerados
+        const response = await request(app)
+            .post('/register')
+            .send(data)
+
+        //Faz a requisição novamente usando os mesmos dados
+        const secondResponse = await request(app)
+            .post('/register')
+            .send(data)
+
+        //Espera-se que o status retornado seja 500 pois o e-mail já está sendo usado
+        expect(secondResponse.status).toBe(500)
     });
 })
