@@ -11,7 +11,9 @@ describe('Authentication', () => {
     afterEach(() => {
         app.close()
     })
-    //Teste para a rota de autenticação
+
+
+    /****************************Teste para a rota de autenticação**********************************************/
     it('should auth with valid credentials', async () => {
         //Cria um usuário no banco de dados sqlite usando o factory
         const user = await factory.create('User', {
@@ -28,7 +30,8 @@ describe('Authentication', () => {
         expect(response.status).toBe(200)
     });
 
-    //Teste para garantir que a rota de autenticação está recusando usuários incorretos
+
+    /***********Teste para garantir que a rota de autenticação está recusando usuários incorretos***************/
     it('should auth with valid credentials', async () => {
         const user = await factory.create('User', {
             password: bcrypt.hash('123456', 12)
@@ -44,7 +47,8 @@ describe('Authentication', () => {
         expect(response.status).toBe(401)
     });
 
-    //Teste para garantir que a rota de autenticação está retornando um jwt token
+
+    /************Teste para garantir que a rota de autenticação está retornando um jwt token******************/
     it('should return jwt token when authenticated', async () => {
         const user = await factory.create('User', {
             password: bcrypt.hash('123456', 12)

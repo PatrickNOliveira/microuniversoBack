@@ -16,7 +16,8 @@ describe('Users', () => {
         app.close()
     })
 
-    //Teste para garantir que o usuário está sendo criado na rota post (/register)
+
+    /***************Teste para garantir que o usuário está sendo criado na rota post (/register)*****************/
     it('should create user with valid data', async () => {
         const newData = await genericUser
         //Faz uma requisição para a rota de registro com os dados a serem inseridos no sistema
@@ -29,7 +30,7 @@ describe('Users', () => {
     });
 
 
-    //Teste para garantir que o usuário só acessará a rota de editar usuário se estiver autenticado
+    /*******Teste para garantir que o usuário só acessará a rota de editar usuário se estiver autenticado*********/
     it('should be able to access edit users route when authenticated', async () => {
 
         //Seta um usuário com dados aleatórios usando o factory mas, envia uma senha padrão
@@ -59,7 +60,8 @@ describe('Users', () => {
         expect(secondResponse.status).toBe(200)
     });
 
-    //Teste para garantir que o usuário não acessará a rota de editar usuários se não estiver logado
+
+    /******Teste para garantir que o usuário não acessará a rota de editar usuários se não estiver logado *******/
     it('should be not able to access edit users route when dont authenticated', async () => {
 
         //Seta dados genéricos de usuário para serem usados na requisição
@@ -74,8 +76,9 @@ describe('Users', () => {
         expect(response.status).toBe(401)
     });
 
-    //Teste para garantir que o usuário não conseguirá inserir dados no model de usuários se não passar
-    // pelas validações de not Null
+
+    /********Teste para garantir que o usuário não conseguirá inserir dados no model de usuários se não passar
+    pelas validações de not Null ****/
     it('should be not enter a user when submitting missing data', async () => {
 
         //Cria dados para serem enviados para a requisição sem mandar um campo email(obrigatório)
@@ -94,8 +97,8 @@ describe('Users', () => {
         expect(response.status).toBe(500)
     });
 
-    //Teste para garantir que o usuário não conseguirá cadastrar o mesmo e-mail duas vezes
 
+    /**********Teste para garantir que o usuário não conseguirá cadastrar o mesmo e-mail duas vezes*************/
     it('should not be able to insert a used email', async () => {
 
         //Cria dados  genéricos de usuário para serem enviados a requisição

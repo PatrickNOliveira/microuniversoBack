@@ -9,7 +9,7 @@ describe('User', ()=>{
     beforeEach(async () => {
         await truncate()
     })
-    //Teste para a função de inserir um usuário e retornar uma senha criptografada
+    /****************Teste para a função de inserir um usuário e retornar uma senha criptografada*****************/
     it('should encrypt user pass', async ()=> {
         //Cria um usuário no banco de dados sqlite
         const userData = {
@@ -26,7 +26,7 @@ describe('User', ()=>{
     });
 
 
-    //Teste para a função de editar usuários
+    /**************************Teste para a função de editar usuários**************************************/
     it('Should edit a user', async ()=> {
         //Cria um usuário no banco de dados usando um factory
         const user = await factory.create('User', {

@@ -14,7 +14,7 @@ describe('Url', ()=>{
         app.close()
     })
 
-    //Teste para garantir que a rota de inserir um novo url no sistema está retornando um código 201
+    /*******Teste para garantir que a rota de inserir um novo url no sistema está retornando um código 201*******/
     it('should be return a 201 status code', async () => {
         //Gera dados genéricos para a URL
         const data = await genericUrl
@@ -27,7 +27,8 @@ describe('Url', ()=>{
         expect(response.status).toBe(201)
     });
 
-    //Teste para garantir que a rota de inserir um novo url pode ser usada mesmo sem autenticação
+
+    /*******Teste para garantir que a rota de inserir um novo url pode ser usada mesmo sem autenticação***********/
     it('shoul be able to use when not authenticated', async () => {
         //Gera dados genéricos para a URL
         const data = await genericUrl
@@ -42,8 +43,10 @@ describe('Url', ()=>{
         expect(response.body).not.toBeUndefined()
     });
 
-    //Teste para garantir que a rota de inserir um novo url vai inserir o user_id se o
-    // usuário estiver autenticado
+
+    /****Teste para garantir que a rota de inserir um novo url vai inserir o user_id se o
+     *
+    usuário estiver autenticado */
     it('should be insert a user_id in url when user is authenticated', async () => {
 
         //Cria um usuário no banco de dados sqlite
@@ -70,7 +73,8 @@ describe('Url', ()=>{
         expect(response.body.user_id).toBe(user.id)
     });
 
-    //Teste para garantir que o usuário não conseguirá inserir uma URL com o mesmo valor no tinyUrl
+
+    /******Teste para garantir que o usuário não conseguirá inserir uma URL com o mesmo valor no tinyUrl********/
    it('should be not able to insert a used tinyUrl', async () => {
         //Gera dados genéricos para a URL
         const data = await genericUrl
