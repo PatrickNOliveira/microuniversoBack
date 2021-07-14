@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const urlController = require('../controllers/urlController')
-const jwtVerify = require('../middleware/jwtVerify')
+const optionalAuth = require('../middleware/optionalAuth')
 
 const router = Router()
-router.post('/url', urlController.criarUrl)
+router.post('/url', optionalAuth, urlController.criarUrl)
 
 module.exports = router
