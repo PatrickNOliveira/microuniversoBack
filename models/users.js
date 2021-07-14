@@ -38,6 +38,16 @@ module.exports = (sequelize, DataTypes) => {
         },
         isEmail: {
           msg: "Insira um e-mail válido !"
+        },
+        isUnique: async (value, next) => {
+
+          const user = await users.findOne({
+            where: {email: value}
+          })
+
+
+          if (user){ return next('E-mail já está em uso')}
+          next()
         }
       }
     },
