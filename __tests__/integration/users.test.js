@@ -76,8 +76,7 @@ describe('Users', () => {
 
     //Teste para garantir que o usuário não conseguirá inserir dados no model de usuários se não passar
     // pelas validações de not Null
-
-    it('should be not able to access edit users route when dont authenticated', async () => {
+    it('should be not enter a user when submitting missing data', async () => {
 
         //Cria dados para serem enviados para a requisição sem mandar um campo email(obrigatório)
         const data = {
@@ -93,5 +92,26 @@ describe('Users', () => {
 
         //Espera-se que o status retornado seja 500
         expect(response.status).toBe(500)
+    });
+
+    //Teste para garantir que o usuário não conseguirá cadastrar o mesmo e-mail duas vezes
+
+    it('should not be able to insert a used email', async () => {
+
+        //Cria dados  genéricos de usuário para serem enviados a requisição
+        const data = await genericUser
+
+        //Faz a requisição para a rota de registro com os dados gerados
+        const response = await request(app)
+            .post('/register')
+            .send(data)
+
+        //Faz a requisição novamente usando os mesmos dados
+        const secondResponse = await request(app)
+            .post('/register')
+            .send(data)
+
+        //Espera-se que o status retornado seja 500 pois o e-mail já está sendo usado
+        expect(secondResponse.status).toBe(500)
     });
 })
