@@ -52,4 +52,33 @@ describe('Url', ()=>{
         expect(tinyUrlFilter.tinyUrl).toBe(tinyUrl.tinyUrl)
     });
 
+
+    /********************* Teste unitário para a função de buscar URL pelo código ***************************/
+    it('should be return all urls linked to sent user', async () => {
+        //Cria um novo usuário
+        const user = await factory.create('User')
+
+        //Cria uma URL curta com o id do usuário recém criado
+        const tinyUrl = await factory.create('Url', {
+            user_id: user.id
+        })
+
+        //Busca a url criada pelo factory, essa parte do código é necessária para garantir a integridade
+        // do teste pois o módulo create do sequelize retorna mais dados que o necessário
+        const newTinyUrl = await Url.findOne({
+            raw:true,
+            where:{id: Number(tinyUrl.id)}
+        })
+
+        //Busca todas as urls do usuário recém criado
+        const tinyUrlFilter = await Url.findAll({
+            raw: true,
+            where:{ user_id: user.id }
+        })
+
+        //Espera que o índice 0 da URL retornada seja igual a URL gerada pelo teste
+        expect(tinyUrlFilter[0]).toMatchObject(newTinyUrl)
+    });
+
+
 })

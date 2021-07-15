@@ -1,8 +1,8 @@
 const request = require('supertest')
 const bcrypt = require('bcryptjs')
-const app = require('../../index')
-const truncate = require('../../utils/truncate')
-const factory = require('../factories')
+const app = require('../../../index')
+const truncate = require('../../../utils/truncate')
+const factory = require('../../factories')
 
 describe('Authentication', () => {
     beforeEach(async () => {
