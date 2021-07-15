@@ -18,6 +18,20 @@ class UrlController {
         }
     }
 
+    static async buscarPeloCodigo(req, res){
+        try {
+
+            const codigo = req.params.codigo
+            const url = await urlService.searchForCode(codigo)
+            return res.status(200).json(url)
+
+        } catch (err) {
+            if (err){
+                return res.status(500).json(err.message)
+            }
+        }
+    }
+
 }
 
 module.exports = UrlController
