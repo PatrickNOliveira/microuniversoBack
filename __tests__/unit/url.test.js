@@ -16,7 +16,7 @@ describe('Url', ()=>{
         //Dados que serão inseridos na URL
         const data = {
             destiny: 'https://bitbucket.org/PatrickNO/desafio/src/dev/',
-            tinyUrl: 'localhost:3000/teste1',
+            tinyUrl: '060201a',
             user_id: user.id
         }
 

@@ -11,8 +11,7 @@ factory.define('User', users, {
 
 factory.define('Url', Url, {
     destiny: faker.internet.url(),
-    tinyUrl: faker.lorem.word(5,5),
-    user_id: Math.floor(faker.datatype.number()),
+    tinyUrl: faker.lorem.word(7)
 })
 
 module.exports = factory

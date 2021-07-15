@@ -12,7 +12,6 @@ function isAuth(req, res, next){
 
         //Faz a verificação do token usando o SECRET do .env
         jwt.verify(tokenJWT, process.env.SECRET, function (err, decoded) {
-            if (err){next()}
             // Salva no request para uso posterior
             req.user = decoded.usuario;
             next();
