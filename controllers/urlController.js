@@ -7,6 +7,9 @@ class UrlController {
         try {
 
             const url = req.body
+            if (req.user) {
+                url.user_id = req.user.id
+            }
             const urlCriada = await urlService.insertData(url)
             return res.status(201).json(urlCriada)
 
