@@ -5,7 +5,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class users extends Model {
     static associate(models) {
-      // define association here
+      users.hasMany(models.Url, {
+        foreignKey: 'user_id',
+        as: 'url'
+      })
     }
   };
   users.init({

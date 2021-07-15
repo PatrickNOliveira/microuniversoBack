@@ -19,7 +19,8 @@ module.exports = {
       },
       user_id: {
         allowNull: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' }
       }
     });
   },

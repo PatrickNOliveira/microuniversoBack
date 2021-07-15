@@ -1,16 +1,15 @@
+const {users} = require('../models/users')
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Url extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Url.belongsTo(models.users, {
+        foreignKey: 'user_id',
+        as: 'users'
+      })
     }
   };
   Url.init({
@@ -20,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull:{
           msg: "Campo destiny é obrigatório !"
-        }
+        },
+        isUrl: true
       }
     },
     tinyUrl: {
@@ -30,14 +30,18 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{
           msg: "Campo tinyUrl é obrigatório !"
         },
+        len: {
+          args: [7,7],
+          msg: "Campo tinyUrl deve ter 7 caracteres"
+        },
         isUnique: async (value, next) => {
 
-          const user = await Url.findOne({
+          const url = await Url.findOne({
             where: {tinyUrl: value}
           })
 
 
-          if (user){ return next('Url encurtada já existe !')}
+          if (url){ return next('Url encurtada já existe !')}
           next()
         }
       }
