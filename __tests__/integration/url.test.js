@@ -118,4 +118,20 @@ describe('Url', ()=>{
         // único, se o teste passar, a rota está funcionando
         expect(response.body.tinyUrl).toBe(url.tinyUrl)
     });
+
+
+    /************** Teste para garantir que a rota de busca de URL está retornando a URL correta ***************/
+    it('should be return a validation error when send a unexists user id', async () => {
+
+        const response = await request(app)
+            .post('/url')
+            .send({
+                destiny: 'http://localhost:3000',
+                tinyUrl: 'teste12',
+                user_id: 3000
+            })
+
+        expect(response.body).toContain('Validation error')
+
+    });
 })
