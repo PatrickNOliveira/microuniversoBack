@@ -37,4 +37,19 @@ describe('Url', ()=>{
         expect(tinyUrlNew).toStrictEqual(data)
     });
 
+    /********************* Teste unitário para a função de buscar URL pelo código ***************************/
+    it('should be return a tinyUrl', async () => {
+        //Cria uma nova URL
+        const tinyUrl = await factory.create('Url')
+
+        //Faz uma consulta a nova URL usando o código gerado para ela
+        const tinyUrlFilter = await Url.findOne({
+            tinyUrl:{id: Number(tinyUrl.id)},
+            raw: true
+        })
+
+        //Espera que a nova url tenha dados iguais aos que foram passados
+        expect(tinyUrlFilter.tinyUrl).toBe(tinyUrl.tinyUrl)
+    });
+
 })

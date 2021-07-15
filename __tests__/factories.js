@@ -1,6 +1,6 @@
 const { factory } = require('factory-girl')
 const faker = require('faker')
-const { users } = require('../models')
+const { users, Url } = require('../models')
 
 factory.define('User', users, {
     firstName: faker.name.firstName(),
@@ -9,7 +9,7 @@ factory.define('User', users, {
     password: faker.internet.password()
 })
 
-factory.define('Url', users, {
+factory.define('Url', Url, {
     destiny: faker.internet.url(),
     tinyUrl: faker.lorem.word(5,5),
     user_id: Math.floor(faker.datatype.number()),
