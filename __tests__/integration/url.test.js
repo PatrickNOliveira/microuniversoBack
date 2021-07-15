@@ -91,4 +91,17 @@ describe('Url', ()=>{
         expect(secondResponse.body).toContain("Validation error")
     });
 
+
+   /*************** Teste para garantir que a rota de busca de URL está retornando o status 200 *****************/
+   it('should be return a status 200', async () => {
+       //Gera dados genéricos para a URL
+       const url = factory.create('Url')
+
+       //Faz uma requisição para a rota de busca usando o código da URL
+       const response = await request(app)
+           .get('/url/'+url.tinyUrl)
+
+       //Espera-se que o status retornado seja 200 (Ok)
+       expect(response.status).toBe(200)
+   });
 })
