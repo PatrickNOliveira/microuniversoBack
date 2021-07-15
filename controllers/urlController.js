@@ -38,6 +38,18 @@ class UrlController {
         }
     }
 
+    static async urlsDoUsuarioLogado(req, res){
+        try {
+            const id = req.user.id
+            const url = await urlService.getAll(id)
+            return res.status(200).send(url)
+        } catch (err) {
+            if (err){
+                return res.status(500).json(err.message)
+            }
+        }
+    }
+
 }
 
 module.exports = UrlController

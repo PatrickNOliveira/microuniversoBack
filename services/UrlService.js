@@ -10,6 +10,12 @@ class UrlService extends Services {
             where:{tinyUrl: code}
         })
     }
+
+    async getAll(id){
+        return await database[this.model].findAll({
+            where:{user_id: id}
+        })
+    }
 }
 
 module.exports = UrlService
