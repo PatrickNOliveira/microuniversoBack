@@ -9,4 +9,4 @@ RUN set -ex; \
     mysql-client
 COPY . .
 EXPOSE 3000
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh", "entrypoint.sh"]
