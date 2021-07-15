@@ -44,7 +44,7 @@ describe('Url', ()=>{
 
         //Faz uma consulta a nova URL usando o código gerado para ela
         const tinyUrlFilter = await Url.findOne({
-            tinyUrl:{id: Number(tinyUrl.id)},
+            where:{tinyUrl: tinyUrl.tinyUrl},
             raw: true
         })
 

@@ -95,7 +95,7 @@ describe('Url', ()=>{
    /*************** Teste para garantir que a rota de busca de URL está retornando o status 200 *****************/
    it('should be return a status 200', async () => {
        //Gera dados genéricos para a URL
-       const url = factory.create('Url')
+       const url = await factory.create('Url')
 
        //Faz uma requisição para a rota de busca usando o código da URL
        const response = await request(app)
@@ -108,13 +108,14 @@ describe('Url', ()=>{
     /************** Teste para garantir que a rota de busca de URL está retornando a URL correta ***************/
     it('should be return a status 200', async () => {
         //Gera dados genéricos para a URL
-        const url = factory.create('Url')
+        const url = await factory.create('Url')
 
         //Faz uma requisição para a rota de busca usando o código da URL
         const response = await request(app)
             .get('/url/'+url.tinyUrl)
 
-        //Espera-se que o status retornado seja 200 (Ok)
-        expect(response.body).toBe(200)
+        //Espera-se que o tinyUrl da resposta seja igual ao tinyUrl da url criada como o campo é
+        // único, se o teste passar, a rota está funcionando
+        expect(response.body.tinyUrl).toBe(url.tinyUrl)
     });
 })

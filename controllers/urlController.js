@@ -23,7 +23,11 @@ class UrlController {
 
             const codigo = req.params.codigo
             const url = await urlService.searchForCode(codigo)
-            return res.status(200).json(url)
+            if (url) {
+                return res.status(200).json(url)
+            } else {
+                return res.status(204).json()
+            }
 
         } catch (err) {
             if (err){
