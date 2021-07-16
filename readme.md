@@ -7,6 +7,10 @@ Para rodar o projeto será necessário ter o node e o Yarn ou o Docker instalado
  - Para instalar o yarn[Clique aqui](https://classic.yarnpkg.com/en/docs/install/#windows-stable) e siga as instruções
  - Para instalar o docker [Clique aqui](https://www.docker.com/products/docker-desktop/) e siga as instruções
  - Você precisará de um banco de dados mysql rodando na sua máquina se for rodar a aplicação localmente. Dentro do repositório você encontrará um arquivo .yml para criação do banco de dados
+
+# Documentação
+Para acessar a documentação da API [clique aqui](https://documenter.getpostman.com/view/11955461/TzmCfsHn)
+
  
 # Importante
 Antes de iniciar os processos para rodar a aplicação, é importante que você crie um arquivo .env para armazenar suas variáveis de ambiente
