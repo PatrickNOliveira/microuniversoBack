@@ -48,6 +48,17 @@ describe('Url', ()=>{
         });
 
 
+        // Teste para garantir que a rota de busca de URL está retornando um código 204 caso não encontre nada
+        it('should be return a 204 status code when not encountered a url', async () => {
+            //Faz uma requisição para a rota de busca usando um código que não existe
+            const response = await request(app)
+                .get('/url/1111111')
+
+            //Espera-se que a resposta seja um status 204
+            expect(response.status).toBe(204)
+        });
+
+
         //Teste para garantir que a rota de busca de URL está retornando a URL correta
         it('should be return a validation error when send a unexists user id', async () => {
 
@@ -60,31 +71,6 @@ describe('Url', ()=>{
                 })
 
             expect(response.body).toContain('Validation error')
-
-        });
-
-
-        //Teste para garantir que a rota de busca de URL pelo usuário logado está retornando os valores corretos
-        it('should be return all status 200 when user is authenticated', async () => {
-
-            //Cria um usuário no banco de dados sqlite
-            const user = factory.create('User')
-
-            //Autentica o usuário recém criado na API
-            const auth = await request(app)
-                .post('/sessions').
-                send({
-                    email: user.email,
-                    password: user.password
-                })
-
-            //Faz a requisição para busca de URLs
-            const response = await request(app)
-                 .get('/url')
-                 .set('Authorization', `Bearer ${auth.body.token}`)
-
-            //Espera-se que a resposta seja um status 200
-            expect(response.status).toBe(200)
 
         });
 
