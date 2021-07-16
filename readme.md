@@ -4,10 +4,24 @@
 Para rodar o projeto será necessário ter o node e o Yarn ou o Docker instalados.
 
  - Para instalar o node [Clique aqui](https://nodejs.org/en/download/) e siga as instruções
- - - Para instalar o yarn[Clique aqui](https://classic.yarnpkg.com/en/docs/install/#windows-stable) e siga as instruções
+ - Para instalar o yarn[Clique aqui](https://classic.yarnpkg.com/en/docs/install/#windows-stable) e siga as instruções
  - Para instalar o docker [Clique aqui](https://www.docker.com/products/docker-desktop/) e siga as instruções
  - Você precisará de um banco de dados mysql rodando na sua máquina se for rodar a aplicação localmente. Dentro do repositório você encontrará um arquivo .yml para criação do banco de dados
  
+# Importante
+Antes de iniciar os processos para rodar a aplicação, é importante que você crie um arquivo .env para armazenar suas variáveis de ambiente
+Copie o env.example
+
+As variáveis de ambiente devem conter:
+
+ - SECRET= "Senha" para criar os tokens de autenticação jwt
+ - DB_HOST= Host para acesso do banco de dados, caso deseje rodar com o docker compose, essa variável deve, obrigatoriamente ter o valor database-micro
+ - DB_NAME= Nome do banco de dados
+ - DIALECT=mysql Tipo de banco de dados, novamente, para rodar com o docker compose, deve, obrigatoriamente ser um mysql
+ - DB_USER= Nome de usuário do banco de dados
+ - DB_PASS= Senha do banco de dados
+ 
+Para rodar com o docker compose, o db_host e o dialect devem ser os especificados, os demais valores podem ser escolhidos à vontade
 
 # Rodando localmente
 
@@ -41,6 +55,9 @@ A Api rodará no servidor local na porta 3000
 
 # Rodando com Docker
 
+Para rodar a aplicação dessa forma, será necessário levantar também um container com o banco de dados e colocá-lo na mesma rede do container da aplicação
+visto que o localhost de um container é diferente do localhost de outro. Após subir o banco de dados na mesma rede, altere o arquivo .env e coloque o nome do container do banco de dados na variável DB_HOST
+
 
 ## Primeiro passo
 
@@ -69,21 +86,15 @@ Para esta parte, você precisará do docker compose instalado na sua máquina. P
 
 ## Primeiro passo
 
-Construa a imagem do front end com o nome citado anteriormente
-
-    docker build -t patrickn/frontend .
-
-## Segundo passo
-
-Navegue até a pasta do back end e rode o seguinte comando
+Navegue até a pasta do sistema e rode o seguinte comando
 
     docker compose up
 
-A aplicação subirá todos os requisitos necessários para rodar o sistema completo: A api, o banco de dados e front end.
+A aplicação subirá todos os requisitos necessários para rodar o sistema: A api e o banco de dados.
 
 ## Informações importantes
 
-O front end subirá antes dos demais por ter um tempo de inicialização menor. A Api subirá e executará um shell script para aguardar a inicialização do banco de dados e, só então, ficará disponível para receber requisições. Esse processo pode ser um pouco demorado na primeira vez.
+A Api subirá e executará um shell script para aguardar a inicialização do banco de dados e, só então, ficará disponível para receber requisições. Esse processo pode ser um pouco demorado na primeira vez.
 
 ## Testes
 Para rodar os testes, navegue até a pasta da aplicação e rode o seguinte comando
