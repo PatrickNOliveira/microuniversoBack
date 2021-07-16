@@ -19,8 +19,8 @@ services:
       - '3306:3306'
 
   app:
+    container_name: 'app-banckend'
     build: .
-    command: npm start
     restart: always
     networks:
       - application
