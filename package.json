@@ -14,7 +14,7 @@
     },
     "test": "SET NODE_ENV=test&&jest --detectOpenHandles --coverage",
     "posttest": "SET NODE_ENV=test&&npx sequelize db:migrate:undo:all",
-    "start": "NODE_ENV=production&&nodemon index.js",
+    "start": "NODE_ENV=production&&node index.js",
     "dev": "SET NODE_ENV=development&&nodemon index.js"
   },
   "author": "",
