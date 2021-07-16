@@ -1,0 +1,53 @@
+%YAML 1.1
+---
+# microuniverso.sequelizemeta
+-
+  name: "20210711155730-create-users.js"
+-
+  name: "20210713150124-create-url.js"
+# microuniverso.urls
+-
+  id: 21
+  destiny: "http://tre.biz"
+  tinyUrl: "g3ai15s"
+-
+  id: 22
+  destiny: "http://tre.biz"
+  tinyUrl: "g3a715s"
+  user_id: 6
+-
+  id: 23
+  destiny: "https://www.youtube.com/watch?v=g5AgFghQvlA&ab_channel=TorcidaDoFluminense"
+  tinyUrl: "Pz0JWjG"
+# microuniverso.users
+-
+  id: 2
+  firstName: "teste2"
+  lastName: "teste2"
+  email: "teste45@teste.com"
+  password: "$2a$12$gMmg3GVppuml.CDTCAgTXu7b6joUowxXfh4o8eWHu2rdseD/zpoi2"
+-
+  id: 4
+  firstName: "teste2"
+  lastName: "teste2"
+  email: "teste@teste.com"
+  password: "$2a$12$7pt3e/rlOnx9mhvDcKOY0uixNqp5wzIW3sk/unNON05RX3jbut02W"
+-
+  id: 6
+  firstName: "teste2"
+  lastName: "teste2"
+  email: "teste5@teste.com"
+  password: "$2a$12$MQSy/znHTaZqGHGhwcHZceTSotFTs/iNDT0UtwPyk.SYSBuNoyQUC"
+-
+  id: 7
+  firstName: "Patrick"
+  lastName: "Nascimento de Oliveira"
+  email: "patrickndeoliveira@gmail.com"
+  password: "$2a$12$lEsARwF6OBk0WoCgzyO7COIrxDdcZj8/gFs/9lTvx.znMVSGM6KJm"
+-
+  id: 9
+  firstName: "Patrick"
+  lastName: "Nascimento de Oliveira"
+  email: "teste@testando.com"
+  password: "$2a$12$E2k1/qiwFuthEed8jlOwGu1Ahkbvm8GBQltnAUO2EADEQKf7e1csy"
+...
